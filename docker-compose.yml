@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  rustapp:
+    container_name: feedboot
+    image: codaholic/feedboot:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: "postgres:15-alpine"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./pgdata/:/pgdata/
+
+volumes:
+  pgdata: {}
