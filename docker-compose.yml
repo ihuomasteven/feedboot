@@ -3,7 +3,7 @@ version: '3.9'
 services:
   rustapp:
     container_name: feedboot
-    image: codaholic/feedboot:1.0.0
+    image: codaholic/feedboot:1.0.1
     build:
       context: .
       dockerfile: Dockerfile
